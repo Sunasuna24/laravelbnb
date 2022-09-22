@@ -1945,9 +1945,6 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    console.log('created');
-    console.log(this.bookable1);
-    console.log(this.bookable2);
     setTimeout(function () {
       _this.bookable1 = {
         title: "Cheap Villa from date()",
@@ -1957,19 +1954,7 @@ __webpack_require__.r(__webpack_exports__);
         title: "Cheap Villa 2 from date()",
         content: "Very cheap villa 2 from date()"
       };
-      _this.bookable3 = {
-        title: "Expensive villa",
-        content: "Very cheap villa 3 from date()"
-      };
-    }, 3000);
-    setTimeout(function () {
-      console.log('First change');
-      _this.bookable1.title = "You will see this!";
-    }, 8000);
-    setTimeout(function () {
-      console.log('Second change');
-      _this.bookable3.title = "You won't see this";
-    }, 8000);
+    }, 2000);
   }
 });
 
@@ -2090,25 +2075,19 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("bookable-list-item", {
+  return _c("div", [_vm.bookable1 ? _c("bookable-list-item", {
     attrs: {
       "item-title": _vm.bookable1.title,
       "item-content": _vm.bookable1.content,
       price: 1000
     }
-  }), _vm._v(" "), _c("bookable-list-item", {
+  }) : _vm._e(), _vm._v(" "), _vm.bookable2 ? _c("bookable-list-item", {
     attrs: {
       "item-title": _vm.bookable2.title,
       "item-content": _vm.bookable2.content,
       price: 500
     }
-  }), _vm._v(" "), _c("bookable-list-item", {
-    attrs: {
-      "item-title": _vm.bookable3.title,
-      "item-content": _vm.bookable3.content,
-      price: 500
-    }
-  })], 1);
+  }) : _vm._e()], 1);
 };
 
 var staticRenderFns = [];
