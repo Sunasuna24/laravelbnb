@@ -1938,14 +1938,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      bookable1: {
-        title: "Cheap Villa from date()",
-        content: "Very cheap villa from date()"
-      },
-      bookable2: {
-        title: "Cheap Villa 2 from date()",
-        content: "Very cheap villa 2 from date()"
-      }
+      bookable1: null,
+      bookable2: null
     };
   },
   created: function created() {
@@ -1955,9 +1949,27 @@ __webpack_require__.r(__webpack_exports__);
     console.log(this.bookable1);
     console.log(this.bookable2);
     setTimeout(function () {
-      _this.bookable1.title = 'Expensice villa';
-      _this.bookable2.title = 'Very expencive villa';
-    }, 5000);
+      _this.bookable1 = {
+        title: "Cheap Villa from date()",
+        content: "Very cheap villa from date()"
+      };
+      _this.bookable2 = {
+        title: "Cheap Villa 2 from date()",
+        content: "Very cheap villa 2 from date()"
+      };
+      _this.bookable3 = {
+        title: "Expensive villa",
+        content: "Very cheap villa 3 from date()"
+      };
+    }, 3000);
+    setTimeout(function () {
+      console.log('First change');
+      _this.bookable1.title = "You will see this!";
+    }, 8000);
+    setTimeout(function () {
+      console.log('Second change');
+      _this.bookable3.title = "You won't see this";
+    }, 8000);
   }
 });
 
@@ -2088,6 +2100,12 @@ var render = function render() {
     attrs: {
       "item-title": _vm.bookable2.title,
       "item-content": _vm.bookable2.content,
+      price: 500
+    }
+  }), _vm._v(" "), _c("bookable-list-item", {
+    attrs: {
+      "item-title": _vm.bookable3.title,
+      "item-content": _vm.bookable3.content,
       price: 500
     }
   })], 1);

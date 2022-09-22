@@ -10,6 +10,11 @@
             :item-content="bookable2.content"
             :price="500"
         ></bookable-list-item>
+        <bookable-list-item
+            :item-title="bookable3.title"
+            :item-content="bookable3.content"
+            :price="500"
+        ></bookable-list-item>
     </div>
 </template>
 
@@ -21,14 +26,8 @@ export default {
     },
     data() {
         return {
-            bookable1: {
-                title: "Cheap Villa from date()",
-                content: "Very cheap villa from date()"
-            },
-            bookable2: {
-                title: "Cheap Villa 2 from date()",
-                content: "Very cheap villa 2 from date()"
-            },
+            bookable1: null,
+            bookable2: null
         }
     },
     created() {
@@ -37,9 +36,29 @@ export default {
         console.log(this.bookable2);
 
         setTimeout(() => {
-            this.bookable1.title = 'Expensice villa';
-            this.bookable2.title = 'Very expencive villa';
-        }, 5000);
+            this.bookable1 = {
+                title: "Cheap Villa from date()",
+                content: "Very cheap villa from date()"
+            };
+            this.bookable2 = {
+                title: "Cheap Villa 2 from date()",
+                content: "Very cheap villa 2 from date()"
+            };
+            this.bookable3 = {
+                title: "Expensive villa",
+                content: "Very cheap villa 3 from date()"
+            };
+        }, 3000);
+
+        setTimeout(() => {
+            console.log('First change');
+            this.bookable1.title = "You will see this!";
+        }, 8000);
+
+        setTimeout(() => {
+            console.log('Second change');
+            this.bookable3.title = "You won't see this";
+        }, 8000);
     }
 }
 </script>
