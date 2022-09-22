@@ -1913,6 +1913,10 @@ __webpack_require__.r(__webpack_exports__);
     "itemTitle": String,
     "itemContent": String,
     "price": Number
+  },
+  mounted: function mounted() {
+    console.log(this.itemTitle);
+    this.itemTitle = 'New Title';
   }
 });
 
