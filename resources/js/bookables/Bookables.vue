@@ -18,6 +18,24 @@ import BookableListItem from "./BookableListItem";
 export default {
     components: {
         BookableListItem: BookableListItem
-    }
+    },
+    // beforeCreate() {
+    //     console.log('before create');
+    // },
+    created() {
+        console.log('created');
+    },
+    // beforeMount() {
+    //     console.log('before mount');
+    // },
+    // mounted() {
+    //     console.log('mounted');
+    // },
+    // beforeDestroy() {
+    //     console.log('bofore destroy');
+    // },
+    // destroyed() {
+    //     console.log('destoryed');
+    // }
 }
 </script>

@@ -14,7 +14,6 @@ export default {
     },
     mounted() {
         console.log(this.itemTitle);
-        this.itemTitle = 'New Title';
     }
 }
 </script>
