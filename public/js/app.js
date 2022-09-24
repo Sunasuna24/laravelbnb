@@ -2072,7 +2072,7 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "card"
+    staticClass: "card w-100"
   }, [_c("div", {
     staticClass: "card-body"
   }, [_c("h5", {
@@ -2110,7 +2110,7 @@ var render = function render() {
     }, [_vm._l(_vm.bookablesInRow(row), function (bookable, column) {
       return _c("div", {
         key: "row" + row + column,
-        staticClass: "col"
+        staticClass: "col d-flex align-items-stretch"
       }, [_c("bookable-list-item", {
         attrs: {
           "item-title": bookable.title,
