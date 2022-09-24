@@ -6,7 +6,7 @@
                 <div class="col" v-for="(bookable, column) in bookablesInRow(row)" :key="'row'+row+column">
                     <bookable-list-item
                         :item-title="bookable.title"
-                        :item-content="bookable.content"
+                        :item-description="bookable.description"
                         :price="1000"
                     ></bookable-list-item>
                 </div>
@@ -54,39 +54,10 @@ export default {
         .catch(result => console.log(`Error ${result}`));
         console.log(p);
 
-        setTimeout(() => {
-            this.bookables = [
-                {
-                    title: "Cheap Villa !!!(edited)",
-                    content: "A very cheap villa"
-                },
-                {
-                    title: "Cheap Villa 2",
-                    content: "A very cheap villa 2"
-                },
-                {
-                    title: "Cheap Villa 3",
-                    content: "A very cheap villa 2"
-                },
-                {
-                    title: "Cheap Villa 4",
-                    content: "A very cheap villa 2"
-                },
-                {
-                    title: "Cheap Villa 5",
-                    content: "A very cheap villa 2"
-                },
-                {
-                    title: "Cheap Villa 6",
-                    content: "A very cheap villa 2"
-                },
-                {
-                    title: "Cheap Villa 7",
-                    content: "A very cheap villa 2"
-                }
-            ];
+        const request = axios.get("/api/bookables").then(response => {
+            this.bookables = response.data;
             this.loading = false;
-        }, 2000);
+        });
     }
 }
 </script>
