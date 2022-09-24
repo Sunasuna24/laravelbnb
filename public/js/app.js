@@ -2091,11 +2091,20 @@ var render = function render() {
     staticClass: "card w-100"
   }, [_c("div", {
     staticClass: "card-body"
+  }, [_c("router-link", {
+    attrs: {
+      to: {
+        name: "bookable",
+        params: {
+          id: _vm.id
+        }
+      }
+    }
   }, [_c("h5", {
     staticClass: "card-title"
-  }, [_vm._v(_vm._s(_vm.title))]), _vm._v(" "), _c("p", {
+  }, [_vm._v(_vm._s(_vm.title))])]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
-  }, [_vm._v(_vm._s(_vm.description))])])]);
+  }, [_vm._v(_vm._s(_vm.description))])], 1)]);
 };
 
 var staticRenderFns = [];
