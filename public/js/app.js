@@ -2116,12 +2116,9 @@ __webpack_require__.r(__webpack_exports__);
         content: null
       }
     };
-  } // methods: {
-  //     onRatingChanged(rating) {
-  //         console.log(rating);
-  //     }
-  // }
-
+  },
+  created: function created() {// 
+  }
 });
 
 /***/ }),
@@ -2526,16 +2523,7 @@ var render = function render() {
       },
       expression: "review.rating"
     }
-  })], 1), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("button", {
-    staticClass: "btn btn-large btn-primary btn-block"
-  }, [_vm._v("Submit")])]);
-};
-
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", {
+  })], 1), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("label", {
     staticClass: "text-muted",
@@ -2543,15 +2531,35 @@ var staticRenderFns = [function () {
       "for": "content"
     }
   }, [_vm._v("Descript your Experience with")]), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.review.content,
+      expression: "review.content"
+    }],
     staticClass: "form-control",
     attrs: {
       name: "content",
       id: "",
       cols: "30",
       rows: "10"
+    },
+    domProps: {
+      value: _vm.review.content
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+
+        _vm.$set(_vm.review, "content", $event.target.value);
+      }
     }
-  })]);
-}];
+  })]), _vm._v(" "), _c("button", {
+    staticClass: "btn btn-large btn-primary btn-block"
+  }, [_vm._v("Submit")])]);
+};
+
+var staticRenderFns = [];
 render._withStripped = true;
 
 
