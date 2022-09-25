@@ -2114,10 +2114,25 @@ __webpack_require__.r(__webpack_exports__);
       review: {
         rating: 5,
         content: null
-      }
+      },
+      exsistingReview: null,
+      loading: false
     };
   },
-  created: function created() {// 
+  created: function created() {
+    var _this = this;
+
+    this.loading = true;
+    axios.get("/api/reviews/".concat(this.$route.params.id)).then(function (response) {
+      return _this.exsistingReview = response.data.data;
+    })["catch"](function (err) {}).then(function () {
+      return _this.loading = false;
+    });
+  },
+  computed: {
+    alreadyReviewed: function alreadyReviewed() {
+      return this.exsistingReview !== null;
+    }
   }
 });
 
@@ -2507,7 +2522,7 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("div", {
+  return _c("div", [_vm.loading ? _c("div", [_vm._v("Loading...")]) : _c("div", [_vm.alreadyReviewed ? _c("div", [_c("h3", [_vm._v("You have alredy left a review for this booking!")])]) : _c("div", [_c("div", {
     staticClass: "form-group"
   }, [_c("label", {
     staticClass: "text-muted",
@@ -2556,7 +2571,7 @@ var render = function render() {
     }
   })]), _vm._v(" "), _c("button", {
     staticClass: "btn btn-large btn-primary btn-block"
-  }, [_vm._v("Submit")])]);
+  }, [_vm._v("Submit")])])])]);
 };
 
 var staticRenderFns = [];
