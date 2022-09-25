@@ -2114,13 +2114,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     halfStar: function halfStar() {
-      return true;
+      var fraction = Math.round((this.rating - Math.floor(this.rating)) * 100);
+      return 0 < fraction && fraction < 50;
     },
     fullStars: function fullStars() {
-      return 3;
+      return Math.round(this.rating);
     },
     emptyStarts: function emptyStarts() {
-      return 1;
+      return 5 - Math.ceil(this.rating);
     }
   }
 });
@@ -2364,7 +2365,11 @@ var render = function render() {
       staticClass: "col-md-6"
     }, [_vm._v("Pitor Jura")]), _vm._v(" "), _c("div", {
       staticClass: "col-md-6 d-flex justify-content-end"
-    }, [_vm._v("\n                    " + _vm._s(review.rating) + "\n                    "), _c("star-rating")], 1)]), _vm._v(" "), _c("div", {
+    }, [_vm._v("\n                    " + _vm._s(review.rating) + "\n                    "), _c("star-rating", {
+      attrs: {
+        rating: review.rating
+      }
+    })], 1)]), _vm._v(" "), _c("div", {
       staticClass: "row"
     }, [_c("div", {
       staticClass: "col-md-12"
@@ -75670,7 +75675,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Index */ "./resources/js/Index.vue");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _shared_components_StarRating__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./shared/components/StarRating */ "./resources/js/shared/components/StarRating.vue");
+/* harmony import */ var _shared_components_StarRating__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./shared/components/StarRating */ "./resources/js/shared/components/StarRating.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
@@ -75683,7 +75688,7 @@ Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 Vue.filter("fromNow", function (value) {
   return moment__WEBPACK_IMPORTED_MODULE_3___default()(value).fromNow();
 });
-Vue.component("star-rating", _shared_components_StarRating__WEBPACK_IMPORTED_MODULE_5__["default"]);
+Vue.component("star-rating", _shared_components_StarRating__WEBPACK_IMPORTED_MODULE_4__["default"]);
 var app = new Vue({
   el: '#app',
   router: _routes__WEBPACK_IMPORTED_MODULE_1__["default"],
