@@ -31,7 +31,8 @@ export default {
                 content: null
             },
             exsistingReview: null,
-            loading: false
+            loading: false,
+            booking: null
         }
     },
     created() {
@@ -39,9 +40,15 @@ export default {
         axios.get(`/api/reviews/${this.$route.params.id}`)
             .then(response => this.exsistingReview = response.data.data)
             .catch(err => {
-                
+                if (err.response && err.response.status && err.response.status === 404) {
+                    return axios.get(`/api/booking-by-review/${this.$route.params.id}`).then(response => {
+                        this.booking = response.data.data;
+                    })
+                }
             })
-            .then(() => (this.loading = false));
+            .then(() => {
+                this.loading = false;
+            });
     },
     computed: {
         alreadyReviewed() {
