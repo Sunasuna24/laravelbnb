@@ -1,23 +1,36 @@
 <template>
-    <div>
-        <div v-if="loading">Loading...</div>
-        <div v-else>
-            <div v-if="alreadyReviewed">
-                <h3>You have alredy left a review for this booking!</h3>
+    <div class="row">
+        <div :class="[{'col-md-4': loading || !alreadyReviewed}, {'d-none': !loading && alreadyReviewed}]">
+            <div class="card">
+                <div class="card-body">
+                    <div v-if="loading">Loading...</div>
+                    <div v-else>
+                        <p>Stayed at <router-link :to="{name: 'bookable', param: {id: booking.bookable.bookable_id}}">{{ booking.bookable.title }}</router-link></p>
+                        <p>From {{ booking.from }} to {{ booking.to }}</p>
+                    </div>
+                </div>
             </div>
+        </div>
+        <div :class="[{'col-md-8': loading || !alreadyReviewed}, {'col-md-12': !loading && alreadyReviewed}]">
+            <div v-if="loading">Loading...</div>
             <div v-else>
-                <div class="form-group">
-                    <label for="" class="text-muted">Select the Star Rating (1 is worst, 5 is best)</label>
-                    <star-rating
-                        class="fa-3x"
-                        v-model="review.rating"
-                    ></star-rating>
+                <div v-if="alreadyReviewed">
+                    <h3>You have alredy left a review for this booking!</h3>
                 </div>
-                <div class="form-group">
-                    <label for="content" class="text-muted">Descript your Experience with</label>
-                    <textarea name="content" id="" cols="30" rows="10" class="form-control" v-model="review.content"></textarea>
+                <div v-else>
+                    <div class="form-group">
+                        <label for="" class="text-muted">Select the Star Rating (1 is worst, 5 is best)</label>
+                        <star-rating
+                            class="fa-3x"
+                            v-model="review.rating"
+                        ></star-rating>
+                    </div>
+                    <div class="form-group">
+                        <label for="content" class="text-muted">Descript your Experience with</label>
+                        <textarea name="content" id="" cols="30" rows="10" class="form-control" v-model="review.content"></textarea>
+                    </div>
+                    <button class="btn btn-large btn-primary btn-block">Submit</button>
                 </div>
-                <button class="btn btn-large btn-primary btn-block">Submit</button>
             </div>
         </div>
     </div>
@@ -52,7 +65,13 @@ export default {
     },
     computed: {
         alreadyReviewed() {
+            return this.hasReview || !this.booking;
+        },
+        hasReview() {
             return this.exsistingReview !== null;
+        },
+        hasBooking() {
+            return this.booking !== null;
         }
     }
 }
