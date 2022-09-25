@@ -2365,7 +2365,8 @@ var render = function render() {
       staticClass: "col-md-6"
     }, [_vm._v("Pitor Jura")]), _vm._v(" "), _c("div", {
       staticClass: "col-md-6 d-flex justify-content-end"
-    }, [_vm._v("\n                    " + _vm._s(review.rating) + "\n                    "), _c("star-rating", {
+    }, [_c("star-rating", {
+      staticClass: "fa-lg",
       attrs: {
         rating: review.rating
       }
