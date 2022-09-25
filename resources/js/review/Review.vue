@@ -3,9 +3,8 @@
         <div class="form-group">
             <label for="" class="text-muted">Select the Star Rating (1 is worst, 5 is best)</label>
             <star-rating
-                :rating="review.rating"
                 class="fa-3x"
-                v-on:rating:changed="review.rating = $event"
+                v-model="review.rating"
             ></star-rating>
         </div>
         <div class="form-group">
