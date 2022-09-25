@@ -38,7 +38,9 @@ export default {
         this.loading = true;
         axios.get(`/api/reviews/${this.$route.params.id}`)
             .then(response => this.exsistingReview = response.data.data)
-            .catch(err => {})
+            .catch(err => {
+                
+            })
             .then(() => (this.loading = false));
     },
     computed: {
