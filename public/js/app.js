@@ -2520,7 +2520,7 @@ var render = function render() {
   }, [_vm._v("Select the Star Rating (1 is worst, 5 is best)")]), _vm._v(" "), _c("star-rating", {
     staticClass: "fa-3x",
     attrs: {
-      rating: 5
+      rating: _vm.review.rating
     },
     on: {
       "rating:changed": function ratingChanged($event) {
