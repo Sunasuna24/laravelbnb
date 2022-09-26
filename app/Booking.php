@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Booking extends Model
 {
@@ -11,7 +12,7 @@ class Booking extends Model
 
     public function bookable()
     {
-        return $this->hasMany(Bookable::class);
+        return $this->belongsTo(Bookable::class);
     }
 
     public function review()
@@ -22,5 +23,19 @@ class Booking extends Model
     public function scopeBetweenDates(Builder $query, $from, $to)
     {
         return $query->where('to', '>=', $from)->where('from', '<=', $to);
+    }
+
+    public static function findByReviewKey(string $review_key): ?Booking
+    {
+        return static::where('review_key', $review_key)->with('bookable')->get()->first();
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function (Booking $booking) {
+            $booking->review_key = Str::uuid();
+        });
     }
 }
