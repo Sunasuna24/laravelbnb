@@ -1,8 +1,6 @@
 <template>
     <div>
-        <div class="row col-12" v-if="error">
-            Ooops, there is something wrong.
-        </div>
+        <fatal-error v-if="error"></fatal-error>
         <div class="row" v-else>
             <div :class="[{'col-md-4': twoColumns}, {'d-none': oneColumn}]">
                 <div class="card">
@@ -46,6 +44,7 @@ export default {
     data() {
         return {
             review: {
+                id: null,
                 rating: 5,
                 content: null
             },
@@ -57,18 +56,19 @@ export default {
     },
     created() {
         this.loading = true;
-        axios.get(`/api/reviews/${this.$route.params.id}`)
+        this.review.id = this.$route.params.id;
+
+        axios
+            .get(`/api/reviews/${this.review.id}`)
             .then(response => {
                 this.exsistingReview = response.data.data
              })
             .catch(err => {
                 if (is404(err)) {
                     return axios
-                        .get(`/api/booking-by-review/${this.$route.params.id}`)
-                        .then(response => {this.booking = response.data.data})
-                        .catch(err => {
-                            this.error = !is404(err);
-                        });
+                        .get(`/api/booking-by-review/${this.review.id}`)
+                        .then(response => this.booking = response.data.data)
+                        .catch(err => this.error = !is404(err));
                 }
                 this.error = true;
             })
@@ -91,6 +91,16 @@ export default {
         },
         twoColumns() {
             return this.loading || !this.alreadyReviewed;
+        }
+    },
+    methods: {
+        submit() {
+            this.loading = true;
+            axios
+                .post(`/api/reviews`, this.review)
+                .then(response => console.log(response))
+                .catch(err => this.error = true)
+                .then(() => this.loading = false);
         }
     }
 }
